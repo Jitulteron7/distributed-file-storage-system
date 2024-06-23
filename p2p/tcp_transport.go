@@ -12,8 +12,7 @@ Note:
 	2. important functions should always be at the top visa versa
 */
 
-
-// TCPPeer represents the remote node over a TCP established connection. 
+// TCPPeer represents the remote node over a TCP established connection.
 type TCPPeer struct{
 	// conn is the underlying connection of the peer 
 	conn 		net.Conn
@@ -32,7 +31,7 @@ func NewTCPPeer(conn net.Conn, outbound bool) *TCPPeer{
 }
 
 
-type TCPTrasport struct {
+type TCPTransport struct {
 	listenAddress string
 	listener net.Listener
 
@@ -40,15 +39,15 @@ type TCPTrasport struct {
 	peers map[net.Addr]Peer
 }
 
-func NewTCPTrasport(listenAddr string) *TCPTrasport{
-	return &TCPTrasport{
+func NewTCPTransport(listenAddr string) *TCPTransport{
+	return &TCPTransport{
 		listenAddress: listenAddr,
 	}
 }
 
 
 
-func (t *TCPTrasport) ListenAndAccept() error {
+func (t *TCPTransport) ListenAndAccept() error {
 	var err error 
 	
 	t.listener, err = net.Listen("tcp",t.listenAddress)
@@ -63,7 +62,7 @@ func (t *TCPTrasport) ListenAndAccept() error {
 }
 
 
-func (t *TCPTrasport) startAcceptLoop(){
+func (t *TCPTransport) startAcceptLoop(){
 	for {
 		conn, err := t.listener.Accept()
 
@@ -77,7 +76,7 @@ func (t *TCPTrasport) startAcceptLoop(){
 
 
 
-func (t *TCPTrasport) handleConn(conn net.Conn){
+func (t *TCPTransport) handleConn(conn net.Conn){
 	peer := NewTCPPeer(conn, true)
 
 	fmt.Printf("new incoming connection %+v\n", peer)

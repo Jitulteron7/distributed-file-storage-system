@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	tr := p2p.NewTCPTrasport(":3000")
+	tr := p2p.NewTCPTransport(":3000")
 
 	if err := tr.ListenAndAccept(); err !=nil{
 		log.Fatal(err)
