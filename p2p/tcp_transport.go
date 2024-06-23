@@ -35,12 +35,15 @@ type TCPTransport struct {
 	listenAddress string
 	listener net.Listener
 
+	handShakeFunc HandShakeFunc
 	mu sync.RWMutex  // good practice to have mutex above the part which u want to project 
 	peers map[net.Addr]Peer
 }
 
+
 func NewTCPTransport(listenAddr string) *TCPTransport{
 	return &TCPTransport{
+		handShakeFunc: NOPHandshakeFunc,
 		listenAddress: listenAddr,
 	}
 }
