@@ -36,7 +36,7 @@ type TCPTransport struct {
 	listener net.Listener
 
 	handShakeFunc HandShakeFunc
-	mu sync.RWMutex  // good practice to have mutex above the part which u want to project 
+	mu sync.RWMutex  // good practice to have mutex above the part which u want to protect 
 	peers map[net.Addr]Peer
 }
 
